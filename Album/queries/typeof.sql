@@ -1,0 +1,1 @@
+SELECT PG_TYPEOF('title');
