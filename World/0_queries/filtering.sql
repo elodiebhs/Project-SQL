@@ -14,3 +14,9 @@ ORDER BY Name;
 
 SELECT Name FROM Country
 WHERE name LIKE '_n%';
+
+SELECT Name, Continent FROM Country
+WHERE continent IN('Europe')
+ORDER by Name;
+
+SELECT DISTINCT Continent FROM Country;
