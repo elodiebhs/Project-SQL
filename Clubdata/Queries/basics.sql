@@ -32,3 +32,27 @@ FROM facilities;
 -- produce a list of members who joined after the start of September 2012. Return the memid, surname, firstname, and joindate of the members in question.
 SELECT memid, surname, firstname, joindate FROM members
 WHERE joindate >= '2012-09-01'; 
+
+--produce an ordered list of the first 10 surnames in the members table. The list must not contain duplicates.
+SELECT DISTINCT surname FROM members
+ORDER BY surname
+LIMIT 10;
+
+--combined list of all surnames and all facility names
+SELECT surname FROM members
+UNION
+SELECT name from facilities;
+
+--get the signup date of your last member
+SELECT joindate as latest FROM members
+ORDER BY latest DESC
+LIMIT 1;
+
+SELECT max(joindate) as latest
+FROM members;
+
+--get the first and last name of the last member(s) who signed up - not just the date
+SELECT firstname, surname, joindate
+FROM members
+ORDER BY joindate DESC
+LIMIT 1;
