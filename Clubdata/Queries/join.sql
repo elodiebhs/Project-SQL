@@ -9,3 +9,11 @@ JOIN facilities ON bookings.facid = facilities.facid
 WHERE name LIKE '%Tennis Court%'
 AND starttime >= '2012-09-21' AND starttime < '2012-09-22'
 ORDER BY start;
+
+--output a list of all members who have recommended another member. Ensure that there are no duplicates in the list, and that results are ordered by (surname, firstname)
+
+select distinct recs.firstname as firstname, recs.surname as surname
+FROM  members mems
+inner join members recs
+ON recs.memid = mems.recommendedby
+ORDER BY surname, firstname;
