@@ -25,3 +25,11 @@ FROM members mem
 LEFT OUTER JOIN members rec 
 ON rec.memid = mem.recommendedby 
 order by memsname, memfname;
+
+--Produce a list of all members who have used a tennis court
+SELECT DISTINCT CONCAT(members.firstname, ' ' ,members.surname) as member, facilities.name as facility
+FROM members
+JOIN bookings ON members.memid = bookings.memid
+JOIN facilities ON bookings.facid = facilities.facid
+WHERE facilities.name in ('Tennis Court 2','Tennis Court 1')
+order by member, facility;
