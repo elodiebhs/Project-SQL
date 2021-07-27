@@ -50,4 +50,11 @@ WHERE
 		)
 ORDER BY cost desc;
 
--- test
+-- output a list of all members, including the individual who recommended them (if any), without using any joins
+SELECT DISTINCT members.firstname || ' ' ||  members.surname as member,
+	(SELECT recs.firstname || ' ' || recs.surname as recommender 
+		FROM members recs 
+		WHERE recs.memid = members.recommendedby
+	)
+	FROM members
+ORDER BY member;     
