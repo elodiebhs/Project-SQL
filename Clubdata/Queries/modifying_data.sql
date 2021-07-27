@@ -31,3 +31,5 @@ update facilities
         guestcost = (SELECT guestcost * 1.1 FROM facilities WHERE facid = 0)
     WHERE facilities.facid = 1;   
 
+--As part of a clearout of our database, we want to delete all bookings from the cd.bookings table
+DELETE FROM bookings;
