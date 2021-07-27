@@ -49,3 +49,5 @@ WHERE
 			(members.memid != 0 AND bookings.slots*facilities.membercost > 30)
 		)
 ORDER BY cost desc;
+
+-- test
