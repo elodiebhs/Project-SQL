@@ -33,3 +33,19 @@ JOIN bookings ON members.memid = bookings.memid
 JOIN facilities ON bookings.facid = facilities.facid
 WHERE facilities.name in ('Tennis Court 2','Tennis Court 1')
 order by member, facility;
+
+--produce a list of bookings on the day of 2012-09-14 which will cost the member (or guest) more than $30
+SELECT CONCAT(members.firstname, ' ' ,members.surname) as member, facilities.name as facility,
+CASE WHEN members.memid = 0 then bookings.slots*facilities.guestcost
+		else bookings.slots*facilities.membercost
+end as cost
+FROM members
+JOIN bookings ON members.memid = bookings.memid
+JOIN facilities ON bookings.facid = facilities.facid
+WHERE
+		bookings.starttime >= '2012-09-14' AND 
+		bookings.starttime < '2012-09-15' AND (
+			(members.memid = 0 AND bookings.slots*facilities.guestcost > 30) OR
+			(members.memid != 0 AND bookings.slots*facilities.membercost > 30)
+		)
+ORDER BY cost desc;
