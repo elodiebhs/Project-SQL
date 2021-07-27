@@ -17,3 +17,11 @@ FROM  members mems
 inner join members recs
 ON recs.memid = mems.recommendedby
 ORDER BY surname, firstname;
+
+--output a list of all members, including the individual who recommended them (if any)
+
+SELECT mem.firstname as memfname, mem.surname as memsname, rec.firstname as recfname, rec.surname as recsname
+FROM members mem
+LEFT OUTER JOIN members rec 
+ON rec.memid = mem.recommendedby 
+order by memsname, memfname;
