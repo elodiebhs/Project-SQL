@@ -32,4 +32,10 @@ update facilities
     WHERE facilities.facid = 1;   
 
 --As part of a clearout of our database, we want to delete all bookings from the cd.bookings table
-DELETE FROM bookings;
+DELETE
+FROM bookings;
+
+--We want to remove member 37, who has never made a booking, from our database
+DELETE
+FROM members
+WHERE members.memid = 37; 
