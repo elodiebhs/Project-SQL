@@ -41,3 +41,9 @@ ORDER BY facid
 --Find the total number of members （including guests） who have made at least one booking.
 SELECT  COUNT(DISTINCT memid)
 FROM bookings;
+
+--Produce a list of facilities with more than 1000 slots booked
+SELECT facid, SUM(slots) AS "Total Slots" FROM bookings
+GROUP BY facid
+HAVING SUM(slots) > 1000
+ORDER BY facid;
