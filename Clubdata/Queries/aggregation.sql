@@ -2,5 +2,10 @@
 SELECT COUNT (*) FROM facilities;
 
 --Produce a count of the number of facilities that have a cost to guests of 10 or more.
-
 SELECT COUNT(*) FROM facilities WHERE guestcost >= 10;
+
+--Produce a count of the number of recommendations each member has made. Order by member ID.
+SELECT recommendedby, COUNT(*) FROM members
+WHERE recommendedby IS NOT NULL
+GROUP BY recommendedby
+ORDER BY recommendedby;
