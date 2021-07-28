@@ -56,3 +56,13 @@ INNER JOIN cd.facilities
 ON bookings.facid = facilities.facid
 GROUP BY  facilities.name
 ORDER BY revenue;   
+
+--Produce a list of facilities with a total revenue less than 1000
+SELECT  facilities.name
+       ,SUM(CASE WHEN memid = 0 THEN slots * facilities.guestcost else slots * facilities.membercost end) as revenue
+FROM bookings
+INNER JOIN facilities
+ON bookings.facid = facilities.facid
+GROUP BY  facilities.name
+HAVING SUM(CASE WHEN memid = 0 THEN slots * facilities.guestcost else slots * facilities.membercost end) < 1000
+ORDER BY revenue; 
