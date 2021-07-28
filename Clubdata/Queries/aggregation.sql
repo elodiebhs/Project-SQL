@@ -31,3 +31,15 @@ WHERE starttime >= '2012-09-01'
 AND starttime < '2012-10-01' 
 GROUP BY  facid
 ORDER BY SUM(slots); 
+
+--Produce a list of the total number of slots booked per facility per month in the year of 2012
+SELECT  facid
+       ,extract(month
+FROM starttime) AS month, SUM(slots) AS "Total Slots"
+FROM bookings
+WHERE extract(year 
+FROM starttime) = 2012
+GROUP BY  facid
+         ,month
+ORDER BY facid
+         ,month;
