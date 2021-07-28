@@ -9,3 +9,9 @@ SELECT recommendedby, COUNT(*) FROM members
 WHERE recommendedby IS NOT NULL
 GROUP BY recommendedby
 ORDER BY recommendedby;
+
+
+--Produce a list of the total number of slots booked per facility.
+SELECT facid, SUM(slots) AS "Total Slots" FROM bookings
+GROUP BY facid
+ORDER BY facid;
