@@ -47,3 +47,12 @@ SELECT facid, SUM(slots) AS "Total Slots" FROM bookings
 GROUP BY facid
 HAVING SUM(slots) > 1000
 ORDER BY facid;
+
+--Produce a list of facilities along with their total revenue
+SELECT  facilities.name
+       ,SUM(slots * CASE WHEN memid = 0 THEN facilities.guestcost else facilities.membercost end) AS revenue
+FROM cd.bookings
+INNER JOIN cd.facilities 
+ON bookings.facid = facilities.facid
+GROUP BY  facilities.name
+ORDER BY revenue;   
