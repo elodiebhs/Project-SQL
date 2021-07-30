@@ -66,3 +66,11 @@ ON bookings.facid = facilities.facid
 GROUP BY  facilities.name
 HAVING SUM(CASE WHEN memid = 0 THEN slots * facilities.guestcost else slots * facilities.membercost end) < 1000
 ORDER BY revenue; 
+
+--Output the facility id that has the highest number of slots booked
+SELECT  facid
+       ,SUM(slots) AS "Total Slots"
+FROM cd.bookings
+GROUP BY  facid
+ORDER BY SUM(slots) desc
+LIMIT 1;
