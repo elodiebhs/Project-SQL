@@ -70,7 +70,7 @@ ORDER BY revenue;
 --Output the facility id that has the highest number of slots booked
 SELECT  facid
        ,SUM(slots) AS "Total Slots"
-FROM cd.bookings
+FROM bookings
 GROUP BY  facid
 ORDER BY SUM(slots) desc
 LIMIT 1;
@@ -79,7 +79,7 @@ LIMIT 1;
 SELECT  facid
        ,extract(month
 FROM starttime) AS month, SUM(slots) AS slots
-FROM cd.bookings
+FROM bookings
 WHERE starttime >= '2012-01-01' 
 AND starttime < '2013-01-01' 
 GROUP BY  rollup(facid,month)
@@ -87,3 +87,15 @@ ORDER BY facid
          ,month; 
 --ROLLUP produces a hierarchy of aggregations in the order passed into 
 
+
+--Produce a list of the total number of hours booked per facility
+SELECT  facilities.facid
+       ,facilities.name
+       ,trim(to_char(SUM(bookings.slots)/2.0,'9999999999999999D99')) AS "Total Hours"
+FROM bookings
+JOIN facilities
+ON bookings.facid = facilities.facid
+GROUP BY  facilities.facid
+         ,facilities.name
+ORDER BY facilities.facid
+         ,facilities.name;
