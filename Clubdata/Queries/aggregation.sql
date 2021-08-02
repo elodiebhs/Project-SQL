@@ -99,3 +99,17 @@ GROUP BY  facilities.facid
          ,facilities.name
 ORDER BY facilities.facid
          ,facilities.name;
+
+--Produce a list of each member name, id, and their first booking after September 1st 2012. Order by member ID.
+SELECT  members.surname
+       ,members.firstname
+       ,members.memid
+       ,MIN(bookings.starttime)
+FROM members
+JOIN bookings
+ON members.memid = bookings.memid
+WHERE starttime >= '2012-09-01' 
+GROUP BY  members.surname
+         ,members.firstname
+         ,members.memid
+ORDER BY members.memid
